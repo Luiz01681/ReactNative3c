@@ -1,21 +1,17 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
-import { CardUser } from '@/components/CardUser';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
+import ProfileCard from '@/components/ProfileCard';
 
-export default function UsersScreen() {
+export default function ProfileScreen() {
   return (
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <ThemedText type="title" style={styles.headerTitle}>
-          Lista de Usuários
+          Meu Perfil
         </ThemedText>
-        
-        <CardUser name="João" age={18} />
-        <CardUser name="Maria" age={25} />
-        <CardUser name="Pedro" age={30} />
-        
+        <ProfileCard />
       </ScrollView>
     </ThemedView>
   );
@@ -27,11 +23,10 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingTop: 60,
-    paddingHorizontal: 20,
     paddingBottom: 40,
   },
   headerTitle: {
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
 });

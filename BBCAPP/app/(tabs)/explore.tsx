@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Link } from 'expo-router';
 
 import { Collapsible } from '@/components/ui/collapsible';
 import { ExternalLink } from '@/components/external-link';
@@ -31,6 +32,17 @@ export default function TabTwoScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedText>This app includes example code to help you get started.</ThemedText>
+
+      <ThemedView style={styles.buttonContainer}>
+        <ThemedText type="subtitle">Atalhos de Navegação</ThemedText>
+        
+        <Link href="/login-button" asChild>
+          <TouchableOpacity style={StyleSheet.flatten([styles.button, { backgroundColor: '#0a7ea4' }])}>
+            <Text style={styles.buttonText}>Ir para Botão de Login</Text>
+          </TouchableOpacity>
+        </Link>
+      </ThemedView>
+
       <Collapsible title="File-based routing">
         <ThemedText>
           This app has two screens:{' '}
@@ -108,5 +120,20 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  buttonContainer: {
+    gap: 12,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  button: {
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 16,
   },
 });

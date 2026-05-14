@@ -8,8 +8,12 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import { Colors } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function ProfileCard() {
+  const colorScheme = useColorScheme() ?? 'light';
+  const theme = Colors[colorScheme];
   const [name, setName] = useState('Alex Silva');
   const [bio, setBio] = useState('Desenvolvedor Fullstack apaixonado por React Native.');
 
@@ -18,7 +22,7 @@ export default function ProfileCard() {
   };
 
   return (
-    <View style={styles.cardContainer}>
+    <View style={StyleSheet.flatten([styles.cardContainer, { backgroundColor: theme.background }])}>
       {/* Imagem de Perfil */}
       <Image
         source={{ uri: 'https://avatar.iran.liara.run/public/31' }}
@@ -27,20 +31,22 @@ export default function ProfileCard() {
 
       {/* Conteúdo de Informações */}
       <View style={styles.form}>
-        <Text style={styles.label}>Nome de Usuário</Text>
+        <Text style={[styles.label, { color: theme.icon }]}>Nome de Usuário</Text>
         <TextInput
-          style={styles.input}
+          style={StyleSheet.flatten([styles.input, { backgroundColor: colorScheme === 'dark' ? '#2c2c2e' : '#F2F2F7', color: theme.text }])}
           value={name}
           onChangeText={setName}
           placeholder="Seu nome"
+          placeholderTextColor={theme.icon}
         />
 
-        <Text style={styles.label}>Biografia</Text>
+        <Text style={[styles.label, { color: theme.icon }]}>Biografia</Text>
         <TextInput
-          style={[styles.input, styles.bioInput]}
+          style={StyleSheet.flatten([styles.input, styles.bioInput, { backgroundColor: colorScheme === 'dark' ? '#2c2c2e' : '#F2F2F7', color: theme.text }])}
           value={bio}
           onChangeText={setBio}
           placeholder="Fale um pouco sobre você"
+          placeholderTextColor={theme.icon}
           multiline
           numberOfLines={3}
         />
@@ -56,7 +62,6 @@ export default function ProfileCard() {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: '#fff',
     borderRadius: 20,
     padding: 24,
     alignItems: 'center',
@@ -86,12 +91,10 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   input: {
-    backgroundColor: '#F2F2F7',
     borderRadius: 12,
     padding: 12,
     fontSize: 16,
     marginBottom: 16,
-    color: '#1C1C1E',
   },
   bioInput: {
     height: 80,
